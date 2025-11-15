@@ -1,0 +1,203 @@
+
+//PRN 2508445200100
+//NAME YASH CHAUDHARI
+//EMAIL: 832chaudhari@gmail.com
+
+package javatryon;
+
+import java.util.Scanner;
+
+public class assignmentday4 {
+	D_Node root;
+	D_Node last;
+		void insert_left(int data)
+		{
+			D_Node n=new D_Node(data);
+			if(root==null)
+			{
+				root=last=n;
+				root.left=last;
+				last.right=root;
+				
+				
+			}
+			else
+			{
+				
+				n.right=root;
+				n.left=last;
+				root.left=n;
+				last.right=n;
+				root=n;
+			}
+		}
+	void delete_left()
+	{
+		if(root==null)
+		{
+			System.out.println("list is empty");
+		}
+		else if(root==last)
+		{
+			System.out.println("Deleted item is:"+ root.data);
+			root=last=null;
+		}
+		else
+		{
+			D_Node t=root;
+			root=root.right;
+			root.left=last;
+			last.right=root;
+		
+			System.out.println("element  deleted: "+t.data);
+		}
+	}
+	void insert_right(int data)
+	{
+		D_Node n=new D_Node(data);
+		if(root==null)
+		{
+			root=last=n;
+			root.left=last;
+			last.right=root;
+		}
+		else
+		{
+			D_Node t=root;
+			while(t.right!=root)
+			{
+				t=t.right;
+			}
+			t.right=n;
+			n.left=t;
+			n.right=root;
+			root.left=n;
+			last=n;
+			
+		}
+
+	}
+	void delete_right()
+	{
+		if(root==null)
+		{
+			System.out.println("list is empty");
+		}
+		
+			else if(root==last)
+			{
+				System.out.println("delted item is: "+root.data);
+				root=last=null;
+			}
+			else
+			{
+				D_Node t=last;
+				last=last.left;
+				last.right=root;
+				root.left=last;
+				
+				System.out.println("deleted element: "+t.data);
+			}
+			
+		}
+	
+	void print_list()
+	{
+		if(root==null)
+		{
+			System.out.println("list is empty");
+		}
+		else
+		{
+			D_Node t=root;
+			do 
+			{
+				System.out.print("<-|"+t.data+"|->");
+				t=t.right;
+				
+			}while(t!=root);
+			
+		}
+	}
+	void print_list_rev()
+	{
+		if(root==null)
+		{
+			System.out.println("list is empty");
+		}
+		else
+		{
+			D_Node t=last;
+			do
+			{
+				System.out.print("<-|"+t.data+"|->");
+				t=t.left;
+			}while(t!=last);
+				
+			
+		}
+	}
+	public static void main(String[] args) {
+		assignmentday4 obj=new assignmentday4();
+		int choice;
+		int n;
+		Scanner scanner=new Scanner(System.in);
+		do {
+			System.out.println("Linked List Menu");
+			System.out.println("================");
+			System.out.println("1.insert_left");
+			System.out.println("2.insert_right");
+			System.out.println("3.delete_left");
+			System.out.println("4.delete_right");
+			System.out.println("5.print");
+			System.out.println("6.print_rev");
+			System.out.println("0.Exit..");
+			System.out.println("enter your choice:");
+			choice=scanner.nextInt();
+			switch(choice)
+			{
+			case 1:
+				System.out.println("enter element to add");
+				n=scanner.nextInt();
+				obj.insert_left(n);
+				break;
+			case 2:
+				System.out.println("enter element to add");
+				n=scanner.nextInt();
+				obj.insert_right(n);
+				break;
+			
+			case 3:
+				
+				obj.delete_left();
+				break;
+			case 4:
+				
+				obj.delete_right();
+				break;
+		
+			case 5:
+				
+				obj.print_list();
+				break;
+			case 6:
+				
+				obj.print_list_rev();
+				break;
+			
+			case 0:
+				System.out.println("exited....");
+				break;
+				
+			default:
+				System.out.println("invalid choice");
+						
+			}
+			
+			
+			
+		} while (choice!=0);
+
+	}
+}
+

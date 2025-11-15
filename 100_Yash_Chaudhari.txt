@@ -1,0 +1,224 @@
+//PRN 2508445200100
+//NAME YASH CHAUDHARI
+//EMAIL 832chaudhari@gmail.com
+
+
+1->
+
+import java.util.ArrayDeque;
+import java.util.Queue;
+import java.util.Scanner;
+
+class Queue_stack {
+	int MaxSize;
+	Queue<Integer> queue = new ArrayDeque<>();
+
+	void create_stack(int size) {
+		MaxSize = size;
+	}
+
+	void push(int e) {
+		queue.add(e);
+		System.out.println(e + " pushed successfully");
+	}
+
+	int pop() {
+		if (queue.isEmpty()) {
+			System.out.println("Stack is empty!");
+			return -1;
+		}
+
+		for (int i = 0; i < queue.size() - 1; i++) {
+			queue.add(queue.remove());
+		}
+		int temp = queue.peek();
+		queue.remove();
+		return temp;
+	}
+
+	int peek() {
+		if (queue.isEmpty()) {
+			System.out.println("Stack is empty!");
+			return -1;
+		}
+
+		for (int i = 0; i < queue.size() - 1; i++) {
+			queue.add(queue.remove());
+		}
+		int temp = queue.peek();
+		queue.add(queue.remove()); // restore
+		return temp;
+	}
+
+	boolean is_empty() {
+		return queue.isEmpty();
+	}
+
+	boolean is_full() {
+		return MaxSize == queue.size();
+	}
+
+	void print_stack() {
+		if (queue.isEmpty()) {
+			System.out.println("Stack is empty!");
+			return;
+		}
+
+		Queue<Integer> temp = new ArrayDeque<>(queue);
+		System.out.print("Stack contents (top → bottom): ");
+		for (int val : temp) {
+			System.out.print(val + " ");
+		}
+		System.out.println();
+	}
+}
+
+public class assignment1 {
+
+	public static void main(String[] args) {
+
+		Queue_stack obj = new Queue_stack();
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("Enter your size of Queue");
+		int size = sc.nextInt();
+		int choice;
+		obj.create_stack(size);
+		do {
+			System.out.println("\nStack Menu");
+			System.out.println("==========");
+			System.out.println("1.Push");
+			System.out.println("2.Pop");
+			System.out.println("3.Peek");
+			System.out.println("4.Print_Stack");
+			System.out.println("0.Exit");
+			System.out.println("--------");
+			System.out.print(":");
+			choice = sc.nextInt();
+
+			switch (choice) {
+			case 1:
+				if (!obj.is_full()) {
+					System.out.print("Enter number: ");
+					int e = sc.nextInt();
+					obj.push(e);
+				} else {
+					System.out.println("Stack is full");
+				}
+				break;
+			case 2:
+				if (!obj.is_empty()) {
+					int a = obj.pop();
+					System.out.println(a + "====");
+				} else {
+					System.out.println("Stack is empty");
+				}
+				break;
+			case 3:
+				if (!obj.is_empty()) {
+					System.out.println(obj.peek());
+				} else {
+					System.out.println("Stack is empty");
+				}
+				break;
+			case 4:
+				if (!obj.is_empty()) {
+					obj.print_stack();
+				} else {
+					System.out.println("Stack is empty");
+				}
+				break;
+			case 0:
+				System.out.println("Thank You");
+			}
+		} while (choice != 0);
+		sc.close();
+	}
+}
+
+
+
+
+2->
+
+
+package javatryon;
+//package Stack_Examples;e
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Queue;
+import java.util.Scanner;
+
+class load {
+
+	Deque<Integer> stack = new ArrayDeque<>();
+	Deque<Integer> auxstack = new ArrayDeque<>();
+
+	void enqueue(int x) {
+		stack.push(x);
+		System.out.println(x + " enqueued successfully");
+	}
+
+	int dequeue() {
+
+		if (stack.isEmpty()) {
+			System.out.println("Queue is empty!");
+			return -1;
+		}
+
+		while (!stack.isEmpty()) {
+			auxstack.push(stack.pop());
+		}
+
+		int a = auxstack.pop();
+
+		while (!auxstack.isEmpty()) {
+			stack.push(auxstack.pop());
+
+		}
+		return a;
+	}
+
+
+
+}
+
+public class Myclass {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		load q = new load();
+		int choice, val;
+
+		do {
+			System.out.println("\n--- MENU ---");
+			System.out.println("1. Enqueue");
+			System.out.println("2. Dequeue");
+			System.out.println("3. Display Queue");
+			System.out.println("4. Exit");
+			System.out.print("Enter your choice: ");
+			choice = sc.nextInt();
+
+			switch (choice) {
+			case 1:
+				System.out.print("Enter element to enqueue: ");
+				val = sc.nextInt();
+				q.enqueue(val);
+				break;
+			case 2:
+				System.out.println(q.dequeue());
+				break;
+			case 3:
+//				q.printQueue();
+				break;
+			case 4:
+				System.out.println("Bye");
+				break;
+			default:
+				System.out.println("Invalid choice!");
+			}
+		} while (choice != 4);
+
+	}
+
+}
